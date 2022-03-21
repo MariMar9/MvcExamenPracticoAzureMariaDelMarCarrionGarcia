@@ -1,0 +1,30 @@
+﻿@model List<Serie>
+
+<h1>Mover personaje</h1>
+
+<hr />
+
+<h2 style="color:forestgreen">@ViewBag.Mensaje</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label>Seleccione una serie:</label>
+        <select name="idSerie">
+            @foreach(Serie serie in Model)
+                {
+                    <option value="@serie.IdSerie">@serie.Nombre</option>
+                }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Seleccione un personaje:</label>
+        <select name="idPersonaje">
+            @foreach (Personaje personaje in ViewBag.Personajes)
+            {
+                <option value="@personaje.IdPersonaje">@personaje.Nombre</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-info">Mover personaje</button>
+</form>

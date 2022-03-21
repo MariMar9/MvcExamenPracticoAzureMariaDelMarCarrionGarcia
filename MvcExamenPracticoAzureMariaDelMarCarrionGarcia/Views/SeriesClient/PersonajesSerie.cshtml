@@ -1,0 +1,51 @@
+﻿@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#boton").click(function () {
+                var idSerie = $("#idSerie").val();
+                var url = "https://examenpracticoazuremariadelmarcarriongarcia2022.azurewebsites.net/api/Series/PersonajesSerie/" + idSerie;
+                $.ajax({
+                    url: url,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        var html = "";
+                        $.each(data, function (index, serie) {
+                            html += "<tr>"
+                            html += "<td>" + serie.idPersonaje + "</td>";
+                            html += "<td>" + serie.nombre + "</td>";
+                            html += "<td> <img src='" + serie.imagen + "' style='width:300px' /> </td>";
+                            html += "<td>" + serie.idSerie + "</td>";
+                            html += "</tr>";
+                        });
+                        $("#tablaPersonajes tbody").html(html);
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<h1>Personajes de una serie</h1>
+
+<hr />
+
+<div class="form-group">
+    <label>ID serie:</label>
+    <input type="number" id="idSerie" class="form-control" />
+    <button type="submit" id="boton" class="btn btn-warning">Mostrar personajes</button>
+</div>
+
+<hr />
+
+<table id="tablaPersonajes" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Imagen</th>
+            <th>ID serie</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>

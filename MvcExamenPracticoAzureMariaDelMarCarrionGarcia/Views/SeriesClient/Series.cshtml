@@ -1,0 +1,39 @@
+﻿@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            var url = "https://examenpracticoazuremariadelmarcarriongarcia2022.azurewebsites.net/api/Series";
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    var html = "";
+                    $.each(data, function (index, serie) {
+                        html += "<tr>"
+                        html += "<td>" + serie.idSerie + "</td>";
+                        html += "<td>" + serie.nombre + "</td>";
+                        html += "<td> <img src='" + serie.imagen + "' style='width:300px' /> </td>";
+                        html += "<td>" + serie.puntuacion + "</td>";
+                        html += "<td>" + serie.anio + "</td>";
+                        html += "</tr>";
+                    });
+                    $("#tablaSeries tbody").html(html);
+                }
+            });
+        });
+    </script>
+}
+
+<table id="tablaSeries" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Imagen</th>
+            <th>Puntuación</th>
+            <th>Año</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+

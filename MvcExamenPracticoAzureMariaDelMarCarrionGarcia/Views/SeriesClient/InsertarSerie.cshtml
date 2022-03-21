@@ -1,0 +1,73 @@
+﻿@model MvcExamenPracticoAzureMariaDelMarCarrionGarcia.Models.Serie
+
+@{
+    ViewData["Title"] = "InsertarSerie";
+}
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $("#botonCrear").click(function () {
+                var serie = new Object();
+                serie.idSerie = 0;
+                serie.nombre = $("#nombre").val();
+                serie.imagen = $("#imagen").val();
+                serie.puntuacion = $("#puntuacion").val();
+                serie.anio = $("#anio").val();
+                var json = JSON.stringify(serie);
+                var url = "https://examenpracticoazuremariadelmarcarriongarcia2022.azurewebsites.net/api/Series";
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    contentType: "application/json",
+                    data: json,
+                    success: function (data) {
+                        $("#mensaje").html("Serie insertada.");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+<h1>InsertarSerie</h1>
+
+<hr />
+
+<h2 id="mensaje" style="color:darkgreen"></h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Nombre" class="control-label"></label>
+            <input id="nombre" asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Imagen" class="control-label"></label>
+            <input id="imagen" asp-for="Imagen" class="form-control" />
+            <span asp-validation-for="Imagen" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Puntuacion" class="control-label"></label>
+            <input id="puntuacion" asp-for="Puntuacion" class="form-control" />
+            <span asp-validation-for="Puntuacion" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Anio" class="control-label"></label>
+            <input id="anio" asp-for="Anio" class="form-control" />
+            <span asp-validation-for="Anio" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="botonCrear" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+</div>

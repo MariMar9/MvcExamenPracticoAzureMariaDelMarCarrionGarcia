@@ -1,0 +1,30 @@
+﻿@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#botonEliminar").click(function () {
+                var idSerie = $("#idSerie").val();
+                var url = "https://examenpracticoazuremariadelmarcarriongarcia2022.azurewebsites.net/api/Series/" + idSerie;
+                $.ajax({
+                    url: url,
+                    method: "DELETE",
+                    success: function () {
+                        $("#mensaje").html("Serie eliminada.");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<h1>Eliminar serie</h1>
+
+<hr />
+
+<h2 id="mensaje" style="color:darkgreen"></h2>
+
+<h1>ID serie:</h1>
+<input type="number" id="idSerie" class="form-control" />
+<button type="submit" id="botonEliminar" class="btn btn-danger">Eliminar</button>
+
+
+
